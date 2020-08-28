@@ -134,8 +134,8 @@ class TestLSTConstructors(unittest.TestCase):
         ans_end_levels = [0.104, 0.189, 1.001, 0.345, 0.741, 0.508, 0.381,
                           0.862, 0.804, 1.349, 1.004]
 
-        self.assertItemsEqual(start_levels, ans_start_levels)
-        self.assertItemsEqual(end_levels, ans_end_levels)
+        self.assertCountEqual(start_levels, ans_start_levels)
+        self.assertCountEqual(end_levels, ans_end_levels)
 
         ## Masses
         start_masses = [round(node.start_mass, 3)
@@ -148,8 +148,8 @@ class TestLSTConstructors(unittest.TestCase):
         ans_end_masses = [0.018, 0.079, 0.947, 0.293, 0.667, 0.473, 0.359,
                           0.816, 0.734, 1.0, 0.949]
 
-        self.assertItemsEqual(start_masses, ans_start_masses)
-        self.assertItemsEqual(end_masses, ans_end_masses)
+        self.assertCountEqual(start_masses, ans_start_masses)
+        self.assertCountEqual(end_masses, ans_end_masses)
 
         ## Sizes and parents
         sizes = [len(node.members) for node in tree.nodes.values()]
@@ -158,8 +158,8 @@ class TestLSTConstructors(unittest.TestCase):
         ans_sizes = [1000, 767, 215, 238, 472, 76, 23, 231, 12, 103, 48]
         ans_parents = [None, 0, 0, 1, 1, 3, 3, 4, 4, 7, 7]
 
-        self.assertItemsEqual(sizes, ans_sizes)
-        self.assertItemsEqual(parents, ans_parents)
+        self.assertCountEqual(sizes, ans_sizes)
+        self.assertCountEqual(parents, ans_parents)
 
     def test_construct_from_graph(self):
         """
@@ -262,7 +262,7 @@ class TestBackwardCompatibility(unittest.TestCase):
             self.assertEqual(len(partition[:, 0]),
                              len(np.unique(partition[:, 0])))
             self.assertEqual(np.min(partition[:, 0]), 0)
-            self.assertItemsEqual(np.unique(partition[:, 1]),
+            self.assertCountEqual(np.unique(partition[:, 1]),
                                   tree.nodes.keys())
 
             # save and load
@@ -270,7 +270,7 @@ class TestBackwardCompatibility(unittest.TestCase):
                 tree.save(t.name)
                 tree2 = dcl.load_tree(t.name)
 
-                self.assertItemsEqual(
+                self.assertCountEqual(
                     [x.start_level for x in tree.nodes.values()],
                     [y.start_level for y in tree2.nodes.values()])
 
@@ -481,7 +481,7 @@ class TestLevelSetTree(unittest.TestCase):
         leaves = [idx for idx, node in self.tree.nodes.items()
                   if len(node.children) == 0]
 
-        self.assertItemsEqual(np.unique(leaf_labels[:, 1]), leaves)
+        self.assertCountEqual(np.unique(leaf_labels[:, 1]), leaves)
 
         ## Check that background filling works correctly.
         full_labels = self.tree.get_clusters(method='leaf',
@@ -519,5 +519,5 @@ class TestLevelSetTree(unittest.TestCase):
         self.assertEqual(np.min(partition[:, 0]), 0)
 
         # Labels should match tree nodes exactly.
-        self.assertItemsEqual(np.unique(partition[:, 1]),
+        self.assertCountEqual(np.unique(partition[:, 1]),
                               self.tree.nodes.keys())

@@ -77,7 +77,7 @@ class TestSimilarityGraphs(unittest.TestCase):
             assert_array_equal(radii, ans_radii)
 
             for neighbors, ans_neighbors in zip(knn, ans_graph):
-                self.assertItemsEqual(neighbors, ans_neighbors)
+                self.assertCountEqual(neighbors, ans_neighbors)
 
     def test_epsilon_graph(self):
         """
@@ -95,7 +95,7 @@ class TestSimilarityGraphs(unittest.TestCase):
         enn = utl.epsilon_graph(self.X, epsilon)
 
         for neighbors, ans_neighbors in zip(enn, ans_graph):
-            self.assertItemsEqual(neighbors, ans_neighbors)
+            self.assertCountEqual(neighbors, ans_neighbors)
 
 
 class TestDensityGrids(unittest.TestCase):
@@ -179,7 +179,7 @@ class TestDensityGrids(unittest.TestCase):
 
         ## Test uniform input.
         levels = utl.define_density_mass_grid(self.uniform_density)
-        self.assertItemsEqual(levels, [1.])
+        self.assertCountEqual(levels, [1.])
 
     def _check_level_grid_answer(self, density, levels):
         """
@@ -226,7 +226,7 @@ class TestDensityGrids(unittest.TestCase):
 
         ## Uniform input should have a single value.
         levels = utl.define_density_level_grid(self.uniform_density)
-        self.assertItemsEqual(levels, [1.])
+        self.assertCountEqual(levels, [1.])
 
 
 class TestClusterReindexing(unittest.TestCase):

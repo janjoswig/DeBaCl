@@ -8,3 +8,4 @@ MANIFEST
 *.pyc
 *.lst
 examples/.ipynb_checkpoints
+.vscode/
