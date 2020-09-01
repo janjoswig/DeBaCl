@@ -1039,8 +1039,8 @@ class LevelSetTree(object):
 
                 segmap += branch_segmap
                 splitmap += branch_splitmap
-                splits = dict(splits.items() + branch_splits.items())
-                segments = dict(segments.items() + branch_segs.items())
+                splits = dict(list(splits.items()) + list(branch_splits.items()))
+                segments = dict(list(segments.items()) + list(branch_segs.items()))
 
             ## find the middle of the children's x-position and make vertical
             #  segment ix
@@ -1183,8 +1183,8 @@ class LevelSetTree(object):
 
                 segmap += branch_segmap
                 splitmap += branch_splitmap
-                splits = dict(splits.items() + branch_splits.items())
-                segments = dict(segments.items() + branch_segs.items())
+                splits = dict(list(splits.items()) + list(branch_splits.items()))
+                segments = dict(list(segments.items()) + list(branch_segs.items()))
 
             ## find the middle of the children's x-position and make vertical
             ## segment ix
